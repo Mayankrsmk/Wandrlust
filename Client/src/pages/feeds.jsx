@@ -65,7 +65,7 @@ const Feeds = () => {
         formData.append("description", descriptionValue);
         formData.append("userId", userId);
         console.log(formData);
-        const res = await axios.post("https://wandrlust-server.fly.dev/uploadPhoto", formData, {
+        const res = await axios.post("http://localhost:5000/uploadPhoto", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -78,7 +78,7 @@ const Feeds = () => {
 
     useEffect(() => {
         const fetchUserDetails = async () => {
-            const res = await fetch(`https://wandrlust-server.fly.dev/${userId}`, {
+            const res = await fetch(`http://localhost:5000/${userId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -98,24 +98,29 @@ const Feeds = () => {
         const getFeeds = async () => {
             setLoadingFeeds(true);
             try {
-                const res = await fetch("https://wandrlust-server.fly.dev/getPhotos", {
+                const res = await fetch("http://localhost:5000/getPhotos", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                     },
                 });
+                if (!res.ok) {
+                    throw new Error("Failed to fetch feeds");
+                }
                 const data = await res.json();
-                console.log(data);
+                console.log("Fetched feeds data:", data);
                 setFeeds(data.data);
             } catch (error) {
                 console.error("Error fetching feeds:", error);
+                toast("Error fetching feeds", { type: "error" });
+            } finally {
+                setLoadingFeeds(false);
             }
-            setLoadingFeeds(false);
         };
         const getUsers = async () => {
             setLoadingUsers(true);
             try {
-                const res = await fetch("https://wandrlust-server.fly.dev/getAllUsers", {
+                const res = await fetch("http://localhost:5000/getAllUsers", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -137,7 +142,7 @@ const Feeds = () => {
     const handleFollow = async (userIdToFollow) => {
         try {
             const res = await fetch(
-                `https://wandrlust-server.fly.dev/follow/${userIdToFollow}`,
+                `http://localhost:5000/follow/${userIdToFollow}`,
                 {
                     method: "PUT",
                     headers: {
@@ -166,7 +171,7 @@ const Feeds = () => {
     const handleUnfollow = async (userIdToUnfollow) => {
         try {
             const res = await fetch(
-                `https://wandrlust-server.fly.dev/unfollow/${userIdToUnfollow}`,
+                `http://localhost:5000/unfollow/${userIdToUnfollow}`,
                 {
                     method: "PUT",
                     headers: {
@@ -235,7 +240,7 @@ const Feeds = () => {
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                             <div style={{ display: "flex", gap: "1rem" }}>
                                 <img
-                                    src={`https://wandrlust-server.fly.dev/profileImages/${userDetails.profileImage}`}
+                                    src={`http://localhost:5000/profileImages/${userDetails.profileImage}`}
                                     width="50px"
                                     height="50px"
                                     alt="profile"
@@ -302,6 +307,11 @@ const Feeds = () => {
                     {loadingFeeds && (
                         <CircularProgress color="secondary" sx={{ color: "#f94566" }} />
                     )}
+                    {feeds.length === 0 && !loadingFeeds && (
+                        <div style={{ textAlign: "center", color: "#f94566", fontSize: "24px", fontWeight: "bold", marginTop: "2rem" }}>
+                            No posts available
+                        </div>
+                    )}
                     {feeds.map((feed, index) => (
                         <Cards
                             key={index}
@@ -355,7 +365,7 @@ const Feeds = () => {
                                             <img
                                                 src={
                                                     user.profileImage
-                                                        ? `https://wandrlust-server.fly.dev/profileImages/${user.profileImage}`
+                                                        ? `http://localhost:5000/profileImages/${user.profileImage}`
                                                         : ProfileImage
                                                 }
                                                 alt="profile"

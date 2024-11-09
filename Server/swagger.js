@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://wandrlust-server.fly.dev',
+        url: 'http://localhost:5000',
         description: 'Backend server',
       },
     ],

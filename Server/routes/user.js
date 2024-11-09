@@ -987,16 +987,24 @@ router.get("/getPhotos", async (req, res) => {
     if (!data) {
       const posts = await Post.find().populate("author").populate("comments.author");
       posts.reverse();
+
+      if (posts.length === 0) {
+        // If no posts are found, delete the cache key
+        await client.del(cacheKey);
+        console.log('No posts found, Redis cache cleared');
+        return res.status(404).json({ message: 'No posts available' });
+      }
+
       data = {
         data: posts,
         custom: "Photos Fetched Successfully!!"
       };
-      client.set(cacheKey, JSON.stringify(data));
-      console.log(data);
-      data = JSON.parse(data);
-      console.log('Photos data set into Redis cache');
+      // Set cache with expiration time (e.g., 3600 seconds = 1 hour)
+      await client.setex(cacheKey, 3600, JSON.stringify(data));
+      console.log('Photos data set into Redis cache with expiration');
     } else {
       console.log('Photos data retrieved from Redis cache');
+      data = JSON.parse(data);
     }
     res.send(data);
   } catch (error) {
