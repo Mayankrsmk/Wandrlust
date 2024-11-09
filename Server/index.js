@@ -13,6 +13,8 @@ const AgencyRoute = require("./routes/agency");
 const swaggerUi = require('swagger-ui-express');
 const specs = require('./swagger');
 
+const PORT = process.env.PORT || 3000;
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
@@ -43,7 +45,6 @@ app.use(
   })
 );
 
-const PORT = 5000;
 
 const connect = () => {
   try {
