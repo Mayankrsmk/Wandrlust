@@ -24,7 +24,7 @@ const Signup = () => {
 
       setLoading(true);
 
-      const response = await fetch("https://wandrlust-9d93.onrender.com/signup", {
+      const response = await fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

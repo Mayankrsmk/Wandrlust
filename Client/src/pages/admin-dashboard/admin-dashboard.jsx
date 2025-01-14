@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     useEffect(() => {
         const getDashboardData = async () => {
             setLoading(true);
-            const res = await fetch("https://wandrlust-9d93.onrender.com/admin/dashboard", {
+            const res = await fetch("http://localhost:3000/admin/dashboard", {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
