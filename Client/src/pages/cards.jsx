@@ -38,7 +38,7 @@ export default function Cards(props) {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/comment/${props.feed._id}`, {
+      const res = await fetch(`https://wandrlust-9d93.onrender.com/comment/${props.feed._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,11 +66,11 @@ export default function Cards(props) {
 
   console.log(props.feed.comments);
 
-  const url = `http://localhost:3000/${props.feed.image}`;
+  const url = `https://wandrlust-9d93.onrender.com/${props.feed.image}`;
 
   const likePost = async (postId) => {
     try {
-      const res = await fetch(`http://localhost:3000/like/${postId}`, {
+      const res = await fetch(`https://wandrlust-9d93.onrender.com/like/${postId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export default function Cards(props) {
 
   const disLikePost = async (postId) => {
     try {
-      const res = await fetch(`http://localhost:3000/dislike/${postId}`, {
+      const res = await fetch(`https://wandrlust-9d93.onrender.com/dislike/${postId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export default function Cards(props) {
 
   const author = props.feed.author || {};
   const profileImageUrl = author.profileImage
-    ? `http://localhost:3000/profileImages/${author.profileImage}`
+    ? `https://wandrlust-9d93.onrender.com/profileImages/${author.profileImage}`
     : ProfileImage;
 
   console.log('Profile Image URL:', profileImageUrl);
@@ -164,7 +164,7 @@ export default function Cards(props) {
         <Image
           alt="Card background"
           className="object-cover rounded-xl"
-          src={`http://localhost:3000/images/${props.feed.image}`}
+          src={`https://wandrlust-9d93.onrender.com/images/${props.feed.image}`}
           width={400}
           style={{ border: "3px solid black" }}
         />
@@ -208,7 +208,7 @@ export default function Cards(props) {
                       <img
                         src={
                           comment.author?.profileImage
-                            ? `http://localhost:3000/profileImages/${comment.author.profileImage}`
+                            ? `https://wandrlust-9d93.onrender.com/profileImages/${comment.author.profileImage}`
                             : ProfileImage
                         }
                         height={30}

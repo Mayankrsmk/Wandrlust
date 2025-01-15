@@ -14,7 +14,7 @@ export default function Posts() {
     useEffect(() => {
         const getAllPosts = async () => {
             setLoadingFeeds(true);
-            const res = await fetch("http://localhost:3000/getPhotos", {
+            const res = await fetch("https://wandrlust-9d93.onrender.com/getPhotos", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

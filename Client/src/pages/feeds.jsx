@@ -67,7 +67,7 @@ const Feeds = () => {
             formData.append("userId", userId);
 
             const response = await axios.post(
-                "http://localhost:3000/uploadPhoto", 
+                "https://wandrlust-9d93.onrender.com/uploadPhoto", 
                 formData, 
                 {
                     headers: {
@@ -91,7 +91,7 @@ const Feeds = () => {
 
     useEffect(() => {
         const fetchUserDetails = async () => {
-            const res = await fetch(`http://localhost:3000/${userId}`, {
+            const res = await fetch(`https://wandrlust-9d93.onrender.com/${userId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const Feeds = () => {
         const getFeeds = async () => {
             setLoadingFeeds(true);
             try {
-                const response = await fetch('http://localhost:3000/getPhotos');
+                const response = await fetch('https://wandrlust-9d93.onrender.com/getPhotos');
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => null);
                     console.error('Server Error:', errorData || await response.text());
@@ -133,7 +133,7 @@ const Feeds = () => {
         const getUsers = async () => {
             setLoadingUsers(true);
             try {
-                const res = await fetch("http://localhost:3000/getAllUsers", {
+                const res = await fetch("https://wandrlust-9d93.onrender.com/getAllUsers", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const Feeds = () => {
     const handleFollow = async (userIdToFollow) => {
         try {
             const res = await fetch(
-                `http://localhost:3000/follow/${userIdToFollow}`,
+                `https://wandrlust-9d93.onrender.com/follow/${userIdToFollow}`,
                 {
                     method: "PUT",
                     headers: {
@@ -184,7 +184,7 @@ const Feeds = () => {
     const handleUnfollow = async (userIdToUnfollow) => {
         try {
             const res = await fetch(
-                `http://localhost:3000/unfollow/${userIdToUnfollow}`,
+                `https://wandrlust-9d93.onrender.com/unfollow/${userIdToUnfollow}`,
                 {
                     method: "PUT",
                     headers: {
@@ -253,7 +253,7 @@ const Feeds = () => {
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                             <div style={{ display: "flex", gap: "1rem" }}>
                                 <img
-                                    src={`http://localhost:3000/profileImages/${userDetails.profileImage}`}
+                                    src={`https://wandrlust-9d93.onrender.com/profileImages/${userDetails.profileImage}`}
                                     width="50px"
                                     height="50px"
                                     alt="profile"
@@ -379,7 +379,7 @@ const Feeds = () => {
                                             <img
                                                 src={
                                                     user.profileImage
-                                                        ? `http://localhost:3000/profileImages/${user.profileImage}`
+                                                        ? `https://wandrlust-9d93.onrender.com/profileImages/${user.profileImage}`
                                                         : ProfileImage
                                                 }
                                                 alt="profile"

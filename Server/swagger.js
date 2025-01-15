@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'https://wandrlust-9d93.onrender.com',
         description: 'Backend server',
       },
     ],

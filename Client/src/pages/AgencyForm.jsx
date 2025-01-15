@@ -22,7 +22,7 @@ const AgencyUpload = () => {
     console.log(formData);
     try {
       const response = await fetch(
-        "http://localhost:3000/agency/agenciesUpload",
+        "https://wandrlust-9d93.onrender.com/agency/agenciesUpload",
         {
           method: "POST",
           headers: {
