@@ -82,7 +82,6 @@ const Feeds = () => {
                 toast.success("Post created successfully!");
                 setCreatePost(false);
                 // Refresh feeds instead of page reload
-                getFeeds();
             }
         } catch (error) {
             console.error("Upload error:", error);
